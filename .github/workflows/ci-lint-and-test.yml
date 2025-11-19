@@ -13,5 +13,5 @@ jobs:
         with:
           node-version: 22
           cache: npm
-      - uses: npm ci
+      - run: npm ci
       - run: npm run lint
