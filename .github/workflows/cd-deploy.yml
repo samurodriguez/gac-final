@@ -1,0 +1,26 @@
+name: deploy to aws
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: connect to ec2 via ssh
+        run: ssh -i ${{ secrets.AWS_EC2_KEY }} ${{ secrets.AWS_EC2_USER }}@${{ secrets.AWS_EC2_HOST }}
+      - run: ls -a
+      - name: update repo
+        run: |
+          cd /opt/app
+          git pull origin main
+      - run: npm ci
+      - run: npm run build
+      - run: pm2 restart all
