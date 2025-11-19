@@ -1,0 +1,17 @@
+name: CI - lint and test
+on:
+  push:
+    branches-ignore:
+      - main
+      - dev
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+      - uses: npm ci
+      - run: npm run lint
