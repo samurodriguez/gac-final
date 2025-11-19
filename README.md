@@ -34,3 +34,18 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+
+### EJERCICIO FINAL
+  - Configurar protecciones para todas las ramas que no deje mergearlas si falla el workflow:
+  - No permitir hacer push/merge directamente (obligar a crear pull request)
+  - No permitir mergear con otro método que no sea squash
+  - Requerir status checks y que la rama esté actualizada antes de mergear
+
+# Pasos workflow:
+
+    - 1. Pasar el linter (npm run lint)
+    - 2. Hacer build (npm run build)
+    - 3. Testear la app con cypress (con la action del marketplace)
+    - 4. Subir el video generado por los tests como un artifact

@@ -1,0 +1,50 @@
+name: final
+
+on:
+  push:
+    branches-ignore:
+      - main
+      - dev
+  pull_request:
+    branches-ignore:
+      - main
+      - dev
+
+env:
+  APP_URL: http://localhost:3000
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar dependecias
+        run: npm ci
+
+      - name: Lintear
+        run: npm run lint
+
+      - name: Modo produccion
+        run: npm run build
+
+      - name: Testear
+        uses: cypress-io/github-action@v6
+        with:
+          start: npm start
+          wait-on: "http://localhost:3000"
+          browser: chrome
+
+      - name: Subir vídeo
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-videos
+          path: cypress/videos
+          if-no-files-found: ignore
