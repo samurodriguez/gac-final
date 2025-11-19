@@ -22,9 +22,15 @@ export default function Home() {
       </p>
       <button
         className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-white px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
+        onClick={() => setResult(result - 1)}
+      >
+        Restar -
+      </button>
+      <button
+        className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-white px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
         onClick={() => setResult(result + 1)}
       >
-        Sumar
+        Sumar +
       </button>
     </main>
   );
